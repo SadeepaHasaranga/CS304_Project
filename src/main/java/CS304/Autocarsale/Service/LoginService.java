@@ -1,6 +1,7 @@
 package CS304.Autocarsale.Service;
 
 import CS304.Autocarsale.DTO.LoginDTO;
+import CS304.Autocarsale.DTO.LoginResponseDTO;
 import CS304.Autocarsale.Entity.Login;
 import CS304.Autocarsale.Repositary.LoginRepository;
 import org.modelmapper.ModelMapper;
@@ -36,4 +37,12 @@ public class LoginService {
         return  null;
     }
 
+    public LoginResponseDTO login(LoginDTO data) {
+
+        Login l = loginRepository.validateLogin(data.getEmail(), data.getPassword());
+        if(l != null){
+            return LoginResponseDTO.builder().userID(l.getUser().getUserID()).role(l.getUser().getRole()).name(l.getUser().getName()).phone_num(l.getUser().getPhone_num()).email(l.getEmail()).build();
+        }
+        return null;
+    }
 }

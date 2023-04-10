@@ -15,6 +15,6 @@ public class BankDTO {
     private String phonenum;
     private String  address;
     private int amount;
-    private String bank;
+    private String bankName;
 
 }

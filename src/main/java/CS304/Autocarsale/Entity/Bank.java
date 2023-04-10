@@ -24,12 +24,7 @@ public class Bank {
     private String phonenum;
     private String  address;
     private int amount;
-    private String bank;
-
-
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name="userID",referencedColumnName = "userID")
-
+    private String bankName;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="userID",referencedColumnName = "userID")
     private User user;

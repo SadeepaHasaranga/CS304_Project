@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/api/v1/vehicle")
 public class VehicleController {
 
@@ -25,7 +26,8 @@ public class VehicleController {
 //    }
 
     @PostMapping("/save")
-    public String saveVehicle(@RequestBody Vehicle vehicle){
+    public VehicleDTO saveVehicle(@RequestBody VehicleDTO vehicle){
+        System.out.println(vehicle.getEmail());
         return vehicleService.saveVehicle(vehicle);
     }
 

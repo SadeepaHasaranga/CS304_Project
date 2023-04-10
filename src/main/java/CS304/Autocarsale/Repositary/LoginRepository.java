@@ -9,6 +9,8 @@ public interface LoginRepository extends JpaRepository<Login,Integer> {
 
     @Query(value = "SELECT * FROM login WHERE email =?1",nativeQuery = true)
     Login validateEmail(String email);
+    @Query(value = "SELECT * FROM login WHERE email =?1 and password=?2",nativeQuery = true)
+    Login validateLogin(String email, String password);
 }
 
 

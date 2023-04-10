@@ -1,6 +1,8 @@
 package CS304.Autocarsale.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +25,9 @@ public class User {
     private String phone_num;
     private String nic;
     private String role;
-
     @OneToOne(mappedBy = "user")
     private Login login;
-    @OneToMany(mappedBy ="user" )
-//    @Column(name = "vehicleId",)
+    @OneToMany(mappedBy ="user", cascade = CascadeType.REMOVE)
     private List<Vehicle> vehicles;
 
     @OneToMany(mappedBy = "user")

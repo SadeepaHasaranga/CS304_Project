@@ -16,18 +16,18 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vehicleID;
     private String brand;
-    private String vehicleModel;
+    private String model;
     private int manufactureYear;
-    private int Mileage;
-    private String vehicleCondition;
+    private int mileage;
+    private String cndition;
     private int price;
     private String description;
-    private String  Sel_Name;
-    private String S_email;
-    private String S_phonenum;
-    private String S_Address;
+    private String  name;
+    private String email;
+    private String phonenum;
+    private String address;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="userID",referencedColumnName = "userID")
     private User user;
 

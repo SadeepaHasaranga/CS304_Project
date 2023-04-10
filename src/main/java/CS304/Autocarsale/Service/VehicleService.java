@@ -24,9 +24,11 @@ public class VehicleService {
 //        return "saved";
 //    }
 
-    public String saveVehicle(Vehicle vehicle){
-        vehicleRepositary.save(vehicle);
-        return "Saved";
+    public VehicleDTO saveVehicle(VehicleDTO vehicle){
+        Vehicle saved=vehicleRepositary.save(modelMapper.map(vehicle,Vehicle.class));
+
+        System.out.println(vehicle.getName());
+        return modelMapper.map(saved,new TypeToken<VehicleDTO>(){}.getType());
     }
 
     public List<Vehicle> getVehicle(){
