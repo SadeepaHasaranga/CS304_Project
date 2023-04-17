@@ -2,8 +2,11 @@ package CS304.Autocarsale.Service;
 
 import CS304.Autocarsale.DTO.LoginDTO;
 import CS304.Autocarsale.DTO.LoginResponseDTO;
+import CS304.Autocarsale.DTO.UserDTO;
 import CS304.Autocarsale.Entity.Login;
+import CS304.Autocarsale.Entity.User;
 import CS304.Autocarsale.Repositary.LoginRepository;
+import CS304.Autocarsale.Repositary.UserRepositary;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ public class LoginService {
 
     @Autowired
     private LoginRepository loginRepository;
+    @Autowired
+    private UserRepositary userRepo;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -37,11 +42,11 @@ public class LoginService {
         return  null;
     }
 
-    public LoginResponseDTO login(LoginDTO data) {
-
+    public UserDTO login(LoginDTO data) {
         Login l = loginRepository.validateLogin(data.getEmail(), data.getPassword());
         if(l != null){
-            return LoginResponseDTO.builder().userID(l.getUser().getUserID()).role(l.getUser().getRole()).name(l.getUser().getName()).phone_num(l.getUser().getPhone_num()).email(l.getEmail()).build();
+            User user=userRepo.getReferenceById(l.getLoginId());
+            return modelMapper.map(user,new TypeToken<UserDTO>(){}.getType());
         }
         return null;
     }

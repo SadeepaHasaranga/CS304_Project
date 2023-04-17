@@ -2,6 +2,7 @@ package CS304.Autocarsale.controller;
 
 import CS304.Autocarsale.DTO.LoginDTO;
 import CS304.Autocarsale.DTO.LoginResponseDTO;
+import CS304.Autocarsale.DTO.UserDTO;
 import CS304.Autocarsale.Service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -117,9 +118,20 @@ public class LoginController {
 //            }
 
     @PostMapping("login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO data){
+    public ResponseEntity<?> login(@RequestBody LoginDTO data){
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        UserDTO provider = loginService.login(data);
 
-                return ResponseEntity.ok(loginService.login(data));
+        if (provider != null) {
+            map.put("status", 1);
+            map.put("data", provider);
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } else {
+            map.clear();
+            map.put("status", 0);
+            map.put("message", "User not added");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
     }
 
 }
